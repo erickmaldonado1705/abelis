@@ -7,7 +7,6 @@
       <h2 class="fw-bold">Panel de Administración</h2>
     </div>
 
-    <!-- Navigation Tabs -->
     <div class="nav-container mb-4">
       <div class="custom-nav mx-auto">
         <button 
@@ -37,9 +36,7 @@
       </div>
     </div>
 
-    <!-- Content -->
     <div class="tab-content">
-      <!-- Clientes Tab -->
       <div v-if="activeTab === 'clientes'" class="animate__animated animate__fadeIn">
         <div class="card border-0 shadow-sm">
           <div class="card-body p-4">
@@ -136,7 +133,6 @@
         </div>
       </div>
 
-      <!-- Administradores Tab -->
       <div v-if="activeTab === 'administradores'" class="animate__animated animate__fadeIn">
         <div class="card border-0 shadow-sm hover-card">
           <div class="card-body p-4">
@@ -148,7 +144,7 @@
                 <h4 class="mb-2">Dar de alta Administrador</h4>
                 <p class="text-muted mb-0">Crear una nueva cuenta de administrador</p>
               </div>
-              <button class="btn btn-primary px-4">
+              <button class="btn btn-primary px-4" @click="showModalAdmin">
                 <i class="bi bi-plus-circle me-2"></i>
                 CREAR
               </button>
@@ -157,7 +153,6 @@
         </div>
       </div>
 
-      <!-- Servicios Tab -->
       <div v-if="activeTab === 'servicios'" class="animate__animated animate__fadeIn">
         <div class="row g-4">
           <div class="col-md-6">
@@ -171,7 +166,7 @@
                     <h4 class="mb-2">Crear nuevo plan</h4>
                     <p class="text-muted mb-0">Agregar un nuevo plan de servicio</p>
                   </div>
-                  <button class="btn btn-primary px-4">
+                  <button class="btn btn-primary px-4" @click="showModalPlan">
                     <i class="bi bi-plus-circle me-2"></i>
                     CREAR
                   </button>
@@ -191,7 +186,7 @@
                     <h4 class="mb-2">Crear nuevo servicio</h4>
                     <p class="text-muted mb-0">Agregar un nuevo tipo de servicio</p>
                   </div>
-                  <button class="btn btn-primary px-4">
+                  <button class="btn btn-primary px-4" @click="showModalServicio">
                     <i class="bi bi-plus-circle me-2"></i>
                     CREAR
                   </button>
@@ -202,15 +197,47 @@
         </div>
       </div>
     </div>
+
+    <ModalCrearAdministrador ref="modalAdmin" />
+    <ModalCrearPlan ref="modalPlan" />
+    <ModalCrearServicio ref="modalServicio" />
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import ModalCrearAdministrador from './modals/ModalCrearAdministrador.vue';
+import ModalCrearPlan from './modals/ModalCrearPlan.vue';
+import ModalCrearServicio from './modals/ModalCrearServicio.vue';
 
 const activeTab = ref('clientes');
 const searchQuery = ref('');
 const statusFilter = ref('');
+const modalAdmin = ref(null);
+const modalPlan = ref(null);
+const modalServicio = ref(null);
+
+let adminModalInstance = null;
+let planModalInstance = null;
+let servicioModalInstance = null;
+
+onMounted(() => {
+  adminModalInstance = new bootstrap.Modal(modalAdmin.value.$el);
+  planModalInstance = new bootstrap.Modal(modalPlan.value.$el);
+  servicioModalInstance = new bootstrap.Modal(modalServicio.value.$el);
+});
+
+const showModalAdmin = () => {
+  adminModalInstance.show();
+};
+
+const showModalPlan = () => {
+  planModalInstance.show();
+};
+
+const showModalServicio = () => {
+  servicioModalInstance.show();
+};
 
 const clients = ref([
   {
@@ -246,7 +273,6 @@ const filteredClients = computed(() => {
 });
 
 const saveClient = (client) => {
-  // Aquí iría la lógica para guardar los cambios del cliente
   console.log('Guardando cliente:', client);
 };
 </script>
