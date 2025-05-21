@@ -1,9 +1,9 @@
 <template>
 <div class="app-container">
   <Navbar />
-  <router-view v-slot="{ Component }">
+  <router-view v-slot="{ Component = null }">
     <transition name="page" mode="out-in">
-      <component :is="Component" />
+      <component :is="Component" v-if="Component" />
     </transition>
   </router-view>
   <Footer />
