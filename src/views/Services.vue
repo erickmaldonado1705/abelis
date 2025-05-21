@@ -1,37 +1,56 @@
 <template>
 <div>
-  <!-- PLANES -->
-  <section class="plans-section py-5">
+  <!-- Hero Section -->
+<section class="hero-section">
+  <div class="container-fluid px-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center animate__animated animate__fadeInLeft">
+        <div class="logo-container">
+          <img
+            src="https://i.pinimg.com/736x/88/4a/8e/884a8ed8ebfa49841a40ab82b1b70965.jpg"
+            alt="AxoWeb Logo"
+            class="img-fluid hero-logo"
+          />
+          <p class="mt-2 text-muted">Asociados con Bufin Del Norte</p>
+          <hr class="divider" />
+
+          <!-- 👇 Rubor con blur más notable -->
+          <div class="hero-banner blur-blush">
+            <h2 class="text-white mb-0">
+              Apoyamos a crear tu negocio digital y a impulsar su crecimiento
+            </h2>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Services Section -->
+  <section class="services-section">
     <div class="container">
-      <h1 class="section-title text-center mb-5 animate__animated animate__fadeIn">NUESTROS PLANES</h1>
-      <div class="row g-4 justify-content-center">
+      <div class="text-center">
+        <h3 class="section-title">Nuestros Servicios</h3>
+        <div class="title-underline"></div>
+      </div>
+
+      <div class="row justify-content-center">
         <div
-          v-for="(plan, index) in planes"
+          v-for="(service, index) in services"
           :key="index"
-          class="col-lg-4 col-md-6 animate__animated animate__fadeInUp"
-          :style="{ animationDelay: `${index * 0.2}s` }"
+          class="col-lg-10 mb-4"
         >
-          <div class="card h-100 rounded-4 shadow-sm text-center">
-            <div class="card-body">
-              <img
-                v-if="plan.img"
-                :src="plan.img"
-                :alt="plan.nombre"
-                class="img-fluid rounded mb-3"
-                style="max-height: 150px;"
-              />
-              <div
-                v-else
-                class="magic-wand-icon bg-gold text-white mb-3 mx-auto d-flex align-items-center justify-content-center rounded-circle"
-              >
-                <i class="bi bi-stars fs-2"></i>
-              </div>
-              <h3 class="mb-3">{{ plan.nombre }}</h3>
-              <ul v-if="plan.detalles" class="list-unstyled text-start" v-html="plan.detalles"></ul>
-              <p v-else class="text-muted">{{ plan.descripcion }}</p>
-              <h4 class="fw-bold mt-3">{{ plan.precio }}</h4>
-              <p class="text-muted">{{ plan.subinfo }}</p>
-              <a href="#" class="btn btn-primary px-4 mt-2 rounded-pill">Solicitar mi plan</a>
+          <div class="service-row">
+            <div
+              class="service-icon-container"
+              :style="{ backgroundColor: service.color }"
+            >
+              <i :class="`bi ${service.icon} service-icon`"></i>
+              <span class="service-title">{{ service.shortTitle }}</span>
+            </div>
+            <div class="service-description">
+              <p class="service-text">{{ service.description }}</p>
             </div>
           </div>
         </div>
@@ -39,26 +58,55 @@
     </div>
   </section>
 
-  <!-- SERVICIOS INDIVIDUALES -->
-  <section class="individual-services py-5 bg-light">
+  <!-- Belief Section -->
+  <section class="belief-section">
     <div class="container">
-      <h2 class="section-title text-center mb-5">SERVICIOS INDIVIDUALES</h2>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 mb-4" v-for="(service, index) in services" :key="index">
-          <div class="card h-100 service-card rounded-4 shadow-sm">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <div
-                  :class="`service-icon text-white p-3 rounded d-flex align-items-center justify-content-center ${service.color}`"
-                >
-                  <i :class="`${service.icon} fs-3`"></i>
-                </div>
-                <h5 class="fw-bold">{{ service.price }}</h5>
+      <div class="row align-items-center">
+        <div class="col-lg-5 mb-4 mb-lg-0">
+          <img
+            src="https://i.pinimg.com/736x/ac/52/ea/ac52eab99e212a99c3412b4f44b2633c.jpg"
+            alt="Digital Business"
+            class="img-fluid belief-image"
+          />
+        </div>
+        <div class="col-lg-7 text-center text-lg-start">
+          <h2 class="belief-title">CREEMOS TU NEGOCIO DIGITAL</h2>
+          <a href="/servicios" class="belief-button">
+            Ver Nuestros Planes <i class="bi bi-arrow-right ms-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects-section">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Nuestros proyectos con empresas</h2>
+        <div class="title-underline"></div>
+      </div>
+      <div class="row justify-content-center">
+        <div
+          class="col-md-4 col-sm-6 mb-4"
+          v-for="(client, index) in clients"
+          :key="index"
+        >
+          <div class="project-card">
+            <div class="project-card-inner">
+              <div class="project-card-front">
+                <img
+                  :src="client.logo"
+                  :alt="client.name"
+                  class="project-logo"
+                />
               </div>
-              <h4>{{ service.title }}</h4>
-              <p class="text-muted">{{ service.description }}</p>
-              <div class="text-center mt-3">
-                <a href="#" class="btn btn-sm btn-primary px-4 rounded-pill">Solicitar</a>
+              <div class="project-card-back">
+                <h5>{{ client.name }}</h5>
+                <p>{{ client.description }}</p>
+                <a :href="client.link" target="_blank" class="project-link">
+                  Visitar sitio <i class="bi bi-box-arrow-up-right ms-2"></i>
+                </a>
               </div>
             </div>
           </div>
@@ -70,112 +118,59 @@
 </template>
 
 <script setup>
-const planes = [
-{
-  nombre: "Huevo",
-  img: "https://i.pinimg.com/736x/42/0b/89/420b893aae646c2488bc67fb406421bc.jpg",
-  detalles: `
-    <li><i class="bi bi-check-circle-fill text-success me-2"></i>Página OLAP</li>
-    <li><i class="bi bi-check-circle-fill text-success me-2"></i>5 Páginas Web</li>
-    <li><i class="bi bi-check-circle-fill text-success me-2"></i>Dominio por 1 año (*.com)</li>
-    <hr>
-  `,
-  precio: "$15,000 MXM",
-  subinfo: "Pago único mensual"
-},
-{
-  nombre: "Ajolote",
-  img: "https://i.pinimg.com/736x/f2/7f/2f/f27f2f084c6428348baae8ccb631e75f.jpg",
-  detalles: `
-    <li><i class="bi bi-check-circle-fill text-success me-2"></i>Página OLAP</li>
-    <li><i class="bi bi-check-circle-fill text-success me-2"></i>Página Web</li>
-    <li><i class="bi bi-check-circle-fill text-success me-2"></i>Correo Empresarial</li>
-    <li><i class="bi bi-check-circle-fill text-success me-2"></i>Hosting y Dominio por 1 año (*.com)</li>
-    <li><i class="bi bi-check-circle-fill text-success me-2"></i>5 cuentas de correo automatizadas</li>
-    <li><i class="bi bi-check-circle-fill text-success me-2"></i>Automatizaciones</li>
-  <hr>
-    `,
-  precio: "$25,000 MXM",
-  subinfo: "Pago único mensual"
-  
-},
-{
-  nombre: "PERSONALIZADO",
-  img: "",
-  descripcion: "Diseñado especialmente para tu negocio. Nos adaptamos a tus necesidades y presupuesto.",
-  
-  precio: "Se define con el cliente" 
-  ,
-  subinfo: "Según necesidades"
-}
+import { ref } from 'vue';
 
-]
+const clients = ref([
+{
+  name: 'Bufin del Norte',
+  logo: 'https://i.pinimg.com/736x/13/fb/65/13fb65def9e21e143aff6967029fd394.jpg',
+  description: 'Consultora en comercio exterior y auditoría aduanera.',
+  link: 'https://bufindelnorte.com.mx',
+},
+{
+  name: 'electrocopy',
+  logo: 'https://i.pinimg.com/736x/5a/33/af/5a33afa816f0be382c805982569c0cd8.jpg',
+  description: 'electrónica para facilitar importaciones y exportaciones.',
+  link: 'https://massbyte.mx',
+},
+{
+  name: 'Dai',
+  logo: 'https://i.pinimg.com/736x/33/f7/57/33f7578274c53bf6980a46b7a7e5c816.jpg',
+  description: 'Despacho aduanal para facilitar importaciones y exportaciones.',
+  link: 'https://dai.mx',
+},
+]);
 
-const services = [
+const services = ref([
 {
-  title: "Desarrollo de Ecommerce",
-  description: "Desarrollo de tu página y tu negocio dentro del mundo digital",
-  price: "$8000 MXM",
-  icon: "bi bi-display",
-  color: "bg-coral"
+  icon: 'bi-laptop',
+  shortTitle: 'Desarrollo Web',
+  description: 'Desarrollo de tu página y tu negocio dentro del mundo digital.',
+  color: '#f76c5e',
 },
 {
-  title: "Servicio de automatización",
-  description: "Plan para automatizar tareas y flujos de trabajo.",
-  price: "$8000 MXM",
-  icon: "bi bi-robot",
-  color: "bg-coral"
+  icon: 'bi-envelope-paper-heart',
+  shortTitle: 'Email Marketing',
+  description: 'Correos electrónicos que venden, sustentados con una estrategia orientada a resultados.',
+  color: '#8857e2',
 },
 {
-  title: "Email Marketing",
-  description: "Correos electrónicos estratégicos y efectivos.",
-  price: "$5000 MXM",
-  icon: "bi bi-envelope",
-  color: "bg-purple"
+  icon: 'bi-palette2',
+  shortTitle: 'Diseño UX/UI',
+  description: 'Diseñamos el concepto de tu tienda en línea para programarla a la medida.',
+  color: '#0d6efd',
 },
 {
-  title: "Diseño de UI/UX",
-  description: "Diseño de interfaces atractivas y funcionales.",
-  price: "$8000 MXM",
-  icon: "bi bi-pencil",
-  color: "bg-info"
+  icon: 'bi-megaphone-fill',
+  shortTitle: 'Publicidad digital',
+  description: 'Implementación de publicidad creativa en redes sociales y Google.',
+  color: '#0dcaf0',
 },
 {
-  title: "Marketing digital",
-  description: "Campañas digitales para potenciar tu marca.",
-  price: "$8000 MXM",
-  icon: "bi bi-megaphone",
-  color: "bg-warning"
-}
-]
+  icon: 'bi-robot',
+  shortTitle: 'Automatización',
+  description: 'Implementación de Servicio de Automatización a tus tareas más comunes dentro de tu empresa.',
+  color: '#ffc107',
+},
+]);
 </script>
-
-<style scoped>
-.section-title {
-font-weight: bold;
-font-size: 2rem;
-}
-
-.service-icon {
-width: 60px;
-height: 60px;
-}
-
-.bg-coral {
-background-color: #f28482;
-}
-
-.bg-purple {
-background-color: #8857e2;
-}
-
-.bg-gold {
-background-color: #f9c74f;
-}
-
-.magic-wand-icon {
-width: 60px;
-height: 60px;
-box-shadow: 0 0 10px #f9c74f;
-}
-</style>
