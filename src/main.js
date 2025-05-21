@@ -12,6 +12,7 @@ import Services from './views/Services.vue'
 import About from './views/About.vue'
 import Contact from './views/Contact.vue'
 import Cliente from './views/clientes /Cliente.vue'
+import Dashboard from './views/administradores/Dashboard.vue'
 
 // Define routes
 const routes = [
@@ -19,7 +20,8 @@ const routes = [
   { path: '/servicios', component: Services },
   { path: '/sobre-nosotros', component: About },
   { path: '/contactanos', component: Contact },
-  { path: '/cliente', component: Cliente }
+  { path: '/cliente', component: Cliente },
+  { path: '/admin', component: Dashboard }
 ]
 
 // Create router
