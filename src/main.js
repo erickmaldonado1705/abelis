@@ -11,7 +11,7 @@ import Home from './views/Home.vue'
 import Services from './views/Services.vue'
 import About from './views/About.vue'
 import Contact from './views/Contact.vue'
-import Cliente from './views/clientes/Cliente.vue'
+import Cliente from './views/clientes /Cliente.vue'
 
 // Define routes
 const routes = [
